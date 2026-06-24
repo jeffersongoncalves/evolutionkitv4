@@ -22,6 +22,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use JeffersonGoncalves\Filament\Pwa\FilamentPwaPlugin;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 use WallaceMartinss\FilamentEvolution\FilamentEvolutionPlugin;
@@ -39,7 +40,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->brandLogo(fn () => Vite::asset(config('evolutionkit.favicon.logo')))
+            ->brandLogo(fn () => Vite::asset(config('evolutionkit.logo')))
             ->brandLogoHeight('40px')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->defaultThemeMode(config('evolutionkit.theme_mode', ThemeMode::Dark))
@@ -74,6 +75,7 @@ class AdminPanelProvider extends PanelProvider
                 __('Settings'),
             ])
             ->plugins([
+                FilamentPwaPlugin::make(),
                 FilamentLogViewer::make()
                     ->navigationGroup(__('Settings')),
                 FilamentEditProfilePlugin::make()
